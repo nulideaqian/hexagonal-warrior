@@ -20,5 +20,6 @@ if __name__ == "__main__":
             messages=messages,
         )
         print(response.choices[0].message.content)
+        print(f"[tokens]: {response.usage.total_tokens}")
         messages.append(
             {"role": "assistant", "content": response.choices[0].message.content})
