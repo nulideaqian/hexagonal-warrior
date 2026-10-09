@@ -4,8 +4,8 @@
 
 # 怎么跑
 
-```
-un run main.py
+```Shell
+uv run main.py
 ```
 
 # key怎么获取
