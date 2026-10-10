@@ -1,0 +1,17 @@
+[project]
+name = "w2-prompt-lab"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "weixin_38342703", email = "weixin_38342703@noreply.gitcode.com" }
+]
+requires-python = ">=3.14"
+dependencies = []
+
+[project.scripts]
+w2-prompt-lab = "w2_prompt_lab:main"
+
+[build-system]
+requires = ["uv_build>=0.12.17,<0.13.0"]
+build-backend = "uv_build"
