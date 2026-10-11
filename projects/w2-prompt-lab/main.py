@@ -10,7 +10,7 @@ OPENAI_API_BASE = os.getenv("OPENAI_API_BASE")
 OPENAI_API_MODEL = os.getenv("OPENAI_API_MODEL")
 
 SYSTEM_PROMPT = """你是一个营销专家
-根据用户系统的商品信息
+根据用户消息的商品信息
 
 请生成：
 1. 商品标题（30字以内，包含核心规格）
@@ -29,13 +29,15 @@ client = OpenAI(base_url=OPENAI_API_BASE, api_key=OPENAI_API_KEY)
 if __name__ == "__main__":
     messages = []
     messages.append({"role": "system", "content": SYSTEM_PROMPT})
+    product_input = input(">>> 请输入商品信息: ")
+    target_audience_input = input(">>> 请输入目标人群: ")
+    messages.append({"role": "user", "content": USER_PROMPT.format(product=product_input, target_audience=target_audience_input)})
     for i in range(5):
-        product_input = input(">>> 请输入商品信息: ")
-        target_audience_input = input(">>> 请输入目标人群: ")
-        messages.append({"role": "user", "content": USER_PROMPT.format(product=product_input, target_audience=target_audience_input)})
         response = client.chat.completions.create(
             model=OPENAI_API_MODEL,
             messages=messages
         )
         print(response.choices[0].message.content)
         messages.append({"role": "assistant", "content": response.choices[0].message.content})
+        user_input = input(">>> 请输入补充信息: ")
+        messages.append({"role": "user", "content": user_input})
