@@ -7,7 +7,10 @@ authors = [
     { name = "weixin_38342703", email = "weixin_38342703@noreply.gitcode.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "openai>=3.28.0",
+    "python-dotenv>=1.2.4",
+]
 
 [project.scripts]
 w2-prompt-lab = "w2_prompt_lab:main"
