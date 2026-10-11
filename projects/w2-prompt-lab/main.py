@@ -31,12 +31,14 @@ if __name__ == "__main__":
     product_input = input(">>> 请输入商品信息: ")
     target_audience_input = input(">>> 请输入目标人群: ")
     messages.append({"role": "user", "content": USER_PROMPT.format(product=product_input, target_audience=target_audience_input)})
-    for i in range(5):
+    while(True):
         response = client.chat.completions.create(
             model=OPENAI_API_MODEL,
             messages=messages
         )
         print(response.choices[0].message.content)
         messages.append({"role": "assistant", "content": response.choices[0].message.content})
-        user_input = input(">>> 请输入补充信息: ")
+        user_input = input(">>> 请输入补充信息: (输入quit后退出)")
+        if user_input == "quit":
+            break
         messages.append({"role": "user", "content": user_input})
