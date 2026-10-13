@@ -19,6 +19,11 @@ SYSTEM_PROMPT = """你是一个营销专家
 """
 
 USER_PROMPT = """
+以下是参考示例（学习风格和标准，不要照抄示例内容）
+
+{examples}
+
+现在请为以下商品生成：
 商品信息：{product}
 目标人群：{target_audience}
 """
@@ -28,9 +33,10 @@ client = OpenAI(base_url=OPENAI_API_BASE, api_key=OPENAI_API_KEY)
 if __name__ == "__main__":
     messages = []
     messages.append({"role": "system", "content": SYSTEM_PROMPT})
+    examples = input(">>> 请输入优秀的参考示例: ")
     product_input = input(">>> 请输入商品信息: ")
     target_audience_input = input(">>> 请输入目标人群: ")
-    messages.append({"role": "user", "content": USER_PROMPT.format(product=product_input, target_audience=target_audience_input)})
+    messages.append({"role": "user", "content": USER_PROMPT.format(product=product_input, target_audience=target_audience_input, examples=examples)})
     while(True):
         response = client.chat.completions.create(
             model=OPENAI_API_MODEL,
